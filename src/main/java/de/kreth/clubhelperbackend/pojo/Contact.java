@@ -2,7 +2,6 @@ package de.kreth.clubhelperbackend.pojo;
 
 import java.util.Locale;
 
-import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 
@@ -99,7 +98,7 @@ public class Contact implements Data {
 				Phonenumber.PhoneNumber phoneNumber = phoneUtil.parse(value, Locale.getDefault().getCountry());
 				if (phoneUtil.isValidNumber(phoneNumber))
 					return type + ": " + phoneUtil.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
-			} catch (NumberParseException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
