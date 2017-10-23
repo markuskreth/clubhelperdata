@@ -136,7 +136,9 @@ public class Person implements Data {
 			return false;
 		if (changed != null ? !changed.equals(person.changed) : person.changed != null)
 			return false;
-		return !(created != null ? !created.equals(person.created) : person.created != null);
+		if (created != null ? !created.equals(person.created) : person.created != null)
+			return false;
+		return true;
 
 	}
 
@@ -150,22 +152,6 @@ public class Person implements Data {
 		result = 31 * result + (changed != null ? changed.hashCode() : 0);
 		result = 31 * result + (created != null ? created.hashCode() : 0);
 		return result;
-	}
-
-	public class RelativeType {
-		private RelationType type;
-		private Person rel;
-
-		private RelativeType() {
-		}
-
-		public Person getRel() {
-			return rel;
-		}
-
-		public RelationType getType() {
-			return type;
-		}
 	}
 
 }

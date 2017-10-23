@@ -1,5 +1,10 @@
 package de.kreth.clubhelperbackend.pojo;
 
+import java.util.Locale;
+
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
+
 /**
  * Entity mapped to table "CONTACT".
  */
@@ -84,6 +89,20 @@ public class Contact implements Data {
 
 	@Override
 	public String toString() {
+		if (type.toLowerCase(Locale.getDefault()).startsWith("tele")
+				|| type.toLowerCase(Locale.getDefault()).matches("mobile")) {
+
+			PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
+
+			try {
+				Phonenumber.PhoneNumber phoneNumber = phoneUtil.parse(value, Locale.getDefault().getCountry());
+				if (phoneUtil.isValidNumber(phoneNumber))
+					return type + ": " + phoneUtil.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 		return type + ": " + value;
 	}
 
@@ -106,7 +125,9 @@ public class Contact implements Data {
 			return false;
 		if (changed != null ? !changed.equals(contact.changed) : contact.changed != null)
 			return false;
-		return !(created != null ? !created.equals(contact.created) : contact.created != null);
+		if (created != null ? !created.equals(contact.created) : contact.created != null)
+			return false;
+		return true;
 
 	}
 

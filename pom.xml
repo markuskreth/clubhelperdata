@@ -4,7 +4,7 @@
 
 	<parent>
 		<groupId>de.kreth</groupId>
-		<version>1.0.5</version>
+		<version>1.0.5-SNAPSHOT</version>
 		<artifactId>clubhelper-parent</artifactId>
 	</parent>
 
@@ -21,44 +21,22 @@
 	  <tag>clubhelperdata-1.0.5</tag>
   </scm>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<executions>
-					<execution>
-						<id>default-compile</id>
-						<configuration>
-							<showDeprecation>true</showDeprecation>
-							<showWarnings>true</showWarnings>
-							<compilerArguments>
-								<source>${maven.compiler.target}</source>
-								<target>${maven.compiler.source}</target>
-							</compilerArguments>
-						</configuration>
-					</execution>
-					<execution>
-						<id>default-testCompile</id>
-						<configuration>
-							<showDeprecation>true</showDeprecation>
-							<showWarnings>true</showWarnings>
-							<compilerArguments>
-								<source>${maven.compiler.testTarget}</source>
-								<target>${maven.compiler.testSource}</target>
-							</compilerArguments>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 	<dependencies>
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>1.10</version>
 		</dependency>
+		<dependency>
+			<groupId>com.googlecode.libphonenumber</groupId>
+			<artifactId>libphonenumber</artifactId>
+			<version>7.7.4</version>
+		</dependency>
 	</dependencies>
+	<scm>
+		<url>https://github.com/markuskreth/clubhelperdata</url>
+		<connection>scm:git:git@github.com:markuskreth/clubhelperdata.git</connection>
+		<developerConnection>scm:git:git@github.com:markuskreth/clubhelperdata.git</developerConnection>
+	  <tag>HEAD</tag>
+  </scm>
 </project>

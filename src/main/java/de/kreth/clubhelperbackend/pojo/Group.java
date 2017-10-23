@@ -63,4 +63,8 @@ public class Group implements Data {
 		return super.clone();
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
 }

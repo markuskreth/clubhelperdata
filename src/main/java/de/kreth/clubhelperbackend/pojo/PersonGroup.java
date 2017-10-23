@@ -73,4 +73,8 @@ public class PersonGroup implements Data {
 		return super.clone();
 	}
 
+	@Override
+	public String toString() {
+		return "personId=" + personId + "; groupId=" + groupId;
+	}
 }
