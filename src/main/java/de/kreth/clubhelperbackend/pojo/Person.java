@@ -10,7 +10,6 @@ public class Person implements Data {
 	private Long id;
 	private String prename;
 	private String surname;
-	private String type;
 	private java.util.Date birth;
 	private java.util.Date changed;
 	private java.util.Date created;
@@ -22,12 +21,11 @@ public class Person implements Data {
 		this.id = id;
 	}
 
-	public Person(Long id, String prename, String surname, String type, java.util.Date birth, java.util.Date changed,
+	public Person(Long id, String prename, String surname, java.util.Date birth, java.util.Date changed,
 			java.util.Date created) {
 		this.id = id;
 		this.prename = prename;
 		this.surname = surname;
-		this.type = type;
 		this.birth = birth;
 		this.changed = changed;
 		this.created = created;
@@ -55,14 +53,6 @@ public class Person implements Data {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public java.util.Date getBirth() {
@@ -94,22 +84,6 @@ public class Person implements Data {
 		return super.clone();
 	}
 
-	public PersonType getPersonType() {
-		try {
-			return PersonType.valueOf(this.type);
-		} catch (Exception e) {
-			if (this.type == null || this.type.startsWith("AC")) {
-				this.setType(PersonType.ACTIVE.name());
-				return PersonType.ACTIVE;
-			} else
-				throw new RuntimeException(e);
-		}
-	}
-
-	public void setPersonType(PersonType type) {
-		setType(type.name());
-	}
-
 	@Override
 	public String toString() {
 		return id + ": " + prename + " " + surname;
@@ -130,8 +104,6 @@ public class Person implements Data {
 			return false;
 		if (surname != null ? !surname.equals(person.surname) : person.surname != null)
 			return false;
-		if (type != null ? !type.equals(person.type) : person.type != null)
-			return false;
 		if (birth != null ? !birth.equals(person.birth) : person.birth != null)
 			return false;
 		if (changed != null ? !changed.equals(person.changed) : person.changed != null)
@@ -146,8 +118,7 @@ public class Person implements Data {
 	public int hashCode() {
 		int result = id != null ? id.hashCode() : 0;
 		result = 31 * result + (prename != null ? prename.hashCode() : 0);
-		result = 31 * result + (surname != null ? surname.hashCode() : 0);
-		result = 31 * result + (type != null ? type.hashCode() : 0);
+		result = 31 * result + (surname != null ? surname.hashCode() : 0); 
 		result = 31 * result + (birth != null ? birth.hashCode() : 0);
 		result = 31 * result + (changed != null ? changed.hashCode() : 0);
 		result = 31 * result + (created != null ? created.hashCode() : 0);
