@@ -3,37 +3,21 @@ package de.kreth.clubhelperbackend.pojo;
 /**
  * Entity mapped to table "PERSON_GROUP".
  */
-public class PersonGroup implements Data {
+public class PersonGroup extends AbstractData {
 
 	private static final long serialVersionUID = 5404113637638434939L;
 
-	private Long id;
 	private long personId;
 	private long groupId;
-	private java.util.Date changed;
-	private java.util.Date created;
 
 	public PersonGroup() {
 	}
 
-	public PersonGroup(Long id) {
-		this.id = id;
-	}
-
-	public PersonGroup(Long id, long personId, long groupId, java.util.Date changed, java.util.Date created) {
-		this.id = id;
+	public PersonGroup(Long id, long personId, long groupId,
+			java.util.Date changed, java.util.Date created) {
+		super(id, changed, created);
 		this.personId = personId;
 		this.groupId = groupId;
-		this.changed = changed;
-		this.created = created;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public long getPersonId() {
@@ -52,29 +36,34 @@ public class PersonGroup implements Data {
 		this.groupId = groupId;
 	}
 
-	public java.util.Date getChanged() {
-		return changed;
-	}
-
-	public void setChanged(java.util.Date changed) {
-		this.changed = changed;
-	}
-
-	public java.util.Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(java.util.Date created) {
-		this.created = created;
-	}
-
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
-	}
-
 	@Override
 	public String toString() {
 		return "personId=" + personId + "; groupId=" + groupId;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + (int) (groupId ^ (groupId >>> 32));
+		result = prime * result + (int) (personId ^ (personId >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PersonGroup other = (PersonGroup) obj;
+		if (groupId != other.groupId)
+			return false;
+		if (personId != other.personId)
+			return false;
+		return true;
+	}
+
 }

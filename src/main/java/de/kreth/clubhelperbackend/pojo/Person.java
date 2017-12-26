@@ -3,40 +3,23 @@ package de.kreth.clubhelperbackend.pojo;
 /**
  * Entity mapped to table "PERSON".
  */
-public class Person implements Data {
+public class Person extends AbstractData {
 
 	private static final long serialVersionUID = -7650782727510018817L;
 
-	private Long id;
 	private String prename;
 	private String surname;
 	private java.util.Date birth;
-	private java.util.Date changed;
-	private java.util.Date created;
 
 	public Person() {
 	}
 
-	public Person(Long id) {
-		this.id = id;
-	}
-
-	public Person(Long id, String prename, String surname, java.util.Date birth, java.util.Date changed,
-			java.util.Date created) {
-		this.id = id;
+	public Person(Long id, String prename, String surname, java.util.Date birth,
+			java.util.Date changed, java.util.Date created) {
+		super(id, changed, created);
 		this.prename = prename;
 		this.surname = surname;
 		this.birth = birth;
-		this.changed = changed;
-		this.created = created;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getPrename() {
@@ -63,66 +46,46 @@ public class Person implements Data {
 		this.birth = birth;
 	}
 
-	public java.util.Date getChanged() {
-		return changed;
-	}
-
-	public void setChanged(java.util.Date changed) {
-		this.changed = changed;
-	}
-
-	public java.util.Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(java.util.Date created) {
-		this.created = created;
-	}
-
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
-	}
-
 	@Override
 	public String toString() {
-		return id + ": " + prename + " " + surname;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-
-		Person person = (Person) o;
-
-		if (id != null ? !id.equals(person.id) : person.id != null)
-			return false;
-		if (prename != null ? !prename.equals(person.prename) : person.prename != null)
-			return false;
-		if (surname != null ? !surname.equals(person.surname) : person.surname != null)
-			return false;
-		if (birth != null ? !birth.equals(person.birth) : person.birth != null)
-			return false;
-		if (changed != null ? !changed.equals(person.changed) : person.changed != null)
-			return false;
-		if (created != null ? !created.equals(person.created) : person.created != null)
-			return false;
-		return true;
-
+		return getId() + ": " + prename + " " + surname;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (prename != null ? prename.hashCode() : 0);
-		result = 31 * result + (surname != null ? surname.hashCode() : 0); 
-		result = 31 * result + (birth != null ? birth.hashCode() : 0);
-		result = 31 * result + (changed != null ? changed.hashCode() : 0);
-		result = 31 * result + (created != null ? created.hashCode() : 0);
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((birth == null) ? 0 : birth.hashCode());
+		result = prime * result + ((prename == null) ? 0 : prename.hashCode());
+		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
 		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Person other = (Person) obj;
+		if (birth == null) {
+			if (other.birth != null)
+				return false;
+		} else if (!birth.equals(other.birth))
+			return false;
+		if (prename == null) {
+			if (other.prename != null)
+				return false;
+		} else if (!prename.equals(other.prename))
+			return false;
+		if (surname == null) {
+			if (other.surname != null)
+				return false;
+		} else if (!surname.equals(other.surname))
+			return false;
+		return true;
 	}
 
 }

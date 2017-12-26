@@ -3,159 +3,136 @@ package de.kreth.clubhelperbackend.pojo;
 /**
  * Entity mapped to table "ADRESS".
  */
-public class Adress implements Data {
+public class Adress extends AbstractData {
 
 	private static final long serialVersionUID = 2456211837852984124L;
 
-    private Long id;
-    private String adress1;
-    private String adress2;
-    private String plz;
-    private String city;
-    private long personId;
-    private java.util.Date changed;
-    private java.util.Date created;
+	private String adress1;
+	private String adress2;
+	private String plz;
+	private String city;
+	private long personId;
 
-    public Adress() {
-    }
+	public Adress() {
+	}
 
-    public Adress(Long id) {
-        this.id = id;
-    }
+	public Adress(Long id, String adress1, String adress2, String plz,
+			String city, long personId, java.util.Date changed,
+			java.util.Date created) {
+		super(id, changed, created);
+		this.adress1 = adress1;
+		this.adress2 = adress2;
+		this.plz = plz;
+		this.city = city;
+		this.personId = personId;
+	}
 
-    public Adress(Long id, String adress1, String adress2, String plz, String city, long personId, java.util.Date changed, java.util.Date created) {
-        this.id = id;
-        this.adress1 = adress1;
-        this.adress2 = adress2;
-        this.plz = plz;
-        this.city = city;
-        this.personId = personId;
-        this.changed = changed;
-        this.created = created;
-    }
+	public String getAdress1() {
+		return adress1;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setAdress1(String adress1) {
+		this.adress1 = adress1;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public String getAdress2() {
+		return adress2;
+	}
 
-    public String getAdress1() {
-        return adress1;
-    }
+	public void setAdress2(String adress2) {
+		this.adress2 = adress2;
+	}
 
-    public void setAdress1(String adress1) {
-        this.adress1 = adress1;
-    }
+	public String getPlz() {
+		return plz;
+	}
 
-    public String getAdress2() {
-        return adress2;
-    }
+	public void setPlz(String plz) {
+		this.plz = plz;
+	}
 
-    public void setAdress2(String adress2) {
-        this.adress2 = adress2;
-    }
+	public String getCity() {
+		return city;
+	}
 
-    public String getPlz() {
-        return plz;
-    }
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-    public void setPlz(String plz) {
-        this.plz = plz;
-    }
+	public long getPersonId() {
+		return personId;
+	}
 
-    public String getCity() {
-        return city;
-    }
+	public void setPersonId(long personId) {
+		this.personId = personId;
+	}
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+	@Override
+	public String toString() {
+		StringBuilder bld = new StringBuilder();
+		if (adress1 != null)
+			bld.append(adress1);
+		if (adress2 != null && adress2.trim().length() > 0) {
+			if (bld.length() > 0)
+				bld.append("\n");
+			bld.append(adress2);
+		}
 
-    public long getPersonId() {
-        return personId;
-    }
+		if (plz != null && plz.length() > 0 && city != null
+				&& city.length() > 0) {
 
-    public void setPersonId(long personId) {
-        this.personId = personId;
-    }
+			if (bld.length() > 0)
+				bld.append("\n");
+			bld.append(plz).append(" ").append(city);
+		}
 
-    public java.util.Date getChanged() {
-        return changed;
-    }
+		return bld.toString();
+	}
 
-    public void setChanged(java.util.Date changed) {
-        this.changed = changed;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((adress1 == null) ? 0 : adress1.hashCode());
+		result = prime * result + ((adress2 == null) ? 0 : adress2.hashCode());
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + (int) (personId ^ (personId >>> 32));
+		result = prime * result + ((plz == null) ? 0 : plz.hashCode());
+		return result;
+	}
 
-    public java.util.Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(java.util.Date created) {
-        this.created = created;
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder bld = new StringBuilder();
-        if(adress1 != null)
-            bld.append(adress1);
-        if(adress2 != null && adress2.trim().length() >0) {
-            if(bld.length()>0)
-                bld.append("\n");
-            bld.append(adress2);
-        }
-
-        if(plz != null && plz.length()>0 && city != null && city.length()>0) {
-
-            if(bld.length()>0)
-                bld.append("\n");
-            bld.append(plz).append(" ").append(city);
-        }
-
-        return bld.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Adress adress = (Adress) o;
-
-        if (personId != adress.personId) return false;
-        if (id != null ? !id.equals(adress.id) : adress.id != null) return false;
-        if (adress1 != null ? !adress1.equals(adress.adress1) : adress.adress1 != null)
-            return false;
-        if (adress2 != null ? !adress2.equals(adress.adress2) : adress.adress2 != null)
-            return false;
-        if (plz != null ? !plz.equals(adress.plz) : adress.plz != null) return false;
-        if (city != null ? !city.equals(adress.city) : adress.city != null) return false;
-        if (changed != null ? !changed.equals(adress.changed) : adress.changed != null)
-            return false;
-        return !(created != null ? !created.equals(adress.created) : adress.created != null);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (adress1 != null ? adress1.hashCode() : 0);
-        result = 31 * result + (adress2 != null ? adress2.hashCode() : 0);
-        result = 31 * result + (plz != null ? plz.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (int) (personId ^ (personId >>> 32));
-        result = 31 * result + (changed != null ? changed.hashCode() : 0);
-        result = 31 * result + (created != null ? created.hashCode() : 0);
-        return result;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Adress other = (Adress) obj;
+		if (adress1 == null) {
+			if (other.adress1 != null)
+				return false;
+		} else if (!adress1.equals(other.adress1))
+			return false;
+		if (adress2 == null) {
+			if (other.adress2 != null)
+				return false;
+		} else if (!adress2.equals(other.adress2))
+			return false;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
+		if (personId != other.personId)
+			return false;
+		if (plz == null) {
+			if (other.plz != null)
+				return false;
+		} else if (!plz.equals(other.plz))
+			return false;
+		return true;
+	}
 
 }
