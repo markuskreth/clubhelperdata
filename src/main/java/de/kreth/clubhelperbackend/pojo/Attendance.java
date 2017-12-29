@@ -3,99 +3,70 @@ package de.kreth.clubhelperbackend.pojo;
 /**
  * Entity mapped to table "ATTENDANCE".
  */
-public class Attendance implements Data {
+public class Attendance extends AbstractData {
 
 	private static final long serialVersionUID = 4629334052631457791L;
 
-    private Long id;
-    private java.util.Date onDate;
-    private long personId;
-    private java.util.Date changed;
-    private java.util.Date created;
+	private java.util.Date onDate;
+	private long personId;
 
-    public Attendance() {
-    }
+	public Attendance() {
+	}
 
-    public Attendance(Long id) {
-        this.id = id;
-    }
+	public Attendance(Long id, java.util.Date onDate, long personId,
+			java.util.Date changed, java.util.Date created) {
+		super(id, changed, created);
+		this.onDate = onDate;
+		this.personId = personId;
+	}
 
-    public Attendance(Long id, java.util.Date onDate, long personId, java.util.Date changed, java.util.Date created) {
-        this.id = id;
-        this.onDate = onDate;
-        this.personId = personId;
-        this.changed = changed;
-        this.created = created;
-    }
+	public java.util.Date getOnDate() {
+		return onDate;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setOnDate(java.util.Date onDate) {
+		this.onDate = onDate;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public long getPersonId() {
+		return personId;
+	}
 
-    public java.util.Date getOnDate() {
-        return onDate;
-    }
+	public void setPersonId(long personId) {
+		this.personId = personId;
+	}
 
-    public void setOnDate(java.util.Date onDate) {
-        this.onDate = onDate;
-    }
+	@Override
+	public String toString() {
+		return "Attendance [onDate=" + onDate + ", personId=" + personId + "]";
+	}
 
-    public long getPersonId() {
-        return personId;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((onDate == null) ? 0 : onDate.hashCode());
+		result = prime * result + (int) (personId ^ (personId >>> 32));
+		return result;
+	}
 
-    public void setPersonId(long personId) {
-        this.personId = personId;
-    }
-
-    public java.util.Date getChanged() {
-        return changed;
-    }
-
-    public void setChanged(java.util.Date changed) {
-        this.changed = changed;
-    }
-
-    public java.util.Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(java.util.Date created) {
-        this.created = created;
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Attendance that = (Attendance) o;
-
-        if (personId != that.personId) return false;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (onDate != null ? !onDate.equals(that.onDate) : that.onDate != null) return false;
-        if (changed != null ? !changed.equals(that.changed) : that.changed != null) return false;
-        return !(created != null ? !created.equals(that.created) : that.created != null);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (onDate != null ? onDate.hashCode() : 0);
-        result = 31 * result + (int) (personId ^ (personId >>> 32));
-        result = 31 * result + (changed != null ? changed.hashCode() : 0);
-        result = 31 * result + (created != null ? created.hashCode() : 0);
-        return result;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Attendance other = (Attendance) obj;
+		if (onDate == null) {
+			if (other.onDate != null)
+				return false;
+		} else if (!onDate.equals(other.onDate))
+			return false;
+		if (personId != other.personId)
+			return false;
+		return true;
+	}
 
 }

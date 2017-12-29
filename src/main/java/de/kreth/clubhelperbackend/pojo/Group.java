@@ -3,35 +3,19 @@ package de.kreth.clubhelperbackend.pojo;
 /**
  * Entity mapped to table "GROUP".
  */
-public class Group implements Data {
+public class Group extends AbstractData {
 
 	private static final long serialVersionUID = 6274828594078300002L;
 
-	private Long id;
 	private String name;
-	private java.util.Date changed;
-	private java.util.Date created;
 
 	public Group() {
 	}
 
-	public Group(Long id) {
-		this.id = id;
-	}
-
-	public Group(Long id, String name, java.util.Date changed, java.util.Date created) {
-		this.id = id;
+	public Group(Long id, String name, java.util.Date changed,
+			java.util.Date created) {
+		super(id, changed, created);
 		this.name = name;
-		this.changed = changed;
-		this.created = created;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -42,29 +26,34 @@ public class Group implements Data {
 		this.name = name;
 	}
 
-	public java.util.Date getChanged() {
-		return changed;
-	}
-
-	public void setChanged(java.util.Date changed) {
-		this.changed = changed;
-	}
-
-	public java.util.Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(java.util.Date created) {
-		this.created = created;
-	}
-
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
-	}
-
 	@Override
 	public String toString() {
 		return name;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Group other = (Group) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
 }
