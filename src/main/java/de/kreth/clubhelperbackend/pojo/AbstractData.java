@@ -2,6 +2,7 @@ package de.kreth.clubhelperbackend.pojo;
 
 import java.util.Date;
 
+@Deprecated()
 public abstract class AbstractData implements Data {
 
 	private Long id;
